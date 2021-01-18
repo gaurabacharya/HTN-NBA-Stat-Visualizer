@@ -34,7 +34,7 @@ class StatPackager:
                 row_string += column + ','
             row_string += '\n'
             f.write(row_string)
-            
+
         f.close()
 
 

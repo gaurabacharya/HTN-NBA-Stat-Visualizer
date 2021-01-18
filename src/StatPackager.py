@@ -24,7 +24,7 @@ class StatPackager:
         for title in header:
             header_string += title + ','
 
-        header_string = header_string[:-1]
+        #header_string = header_string[:-1]
         header_string += '\n'
         f.write(header_string)
 
@@ -34,7 +34,7 @@ class StatPackager:
                 row_string += column + ','
             row_string += '\n'
             f.write(row_string)
-            
+
         f.close()
 
 

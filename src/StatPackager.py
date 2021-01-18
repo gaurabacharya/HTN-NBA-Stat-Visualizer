@@ -24,7 +24,7 @@ class StatPackager:
         for title in header:
             header_string += title + ','
 
-        header_string = header_string[:-1]
+        #header_string = header_string[:-1]
         header_string += '\n'
         f.write(header_string)
 

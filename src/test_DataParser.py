@@ -37,5 +37,5 @@ class TestDatabase(TestCase):
 
     def tests2(self):
 
-        stats = Commands.get_player_stats(self, "Kevin Durant", "20154")
+        stats = Commands.get_player_stats(self, "Kevin Durant", "2017")
         print(stats)

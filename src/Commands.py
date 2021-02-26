@@ -19,6 +19,8 @@ class Commands:
 
         data_base = data.rest_api(table_to_query, default_query)
 
+        print(data_base[347]["player"])
+
         # print(self.data_base)
 
         _2017_18 = []

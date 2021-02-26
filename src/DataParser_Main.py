@@ -2,8 +2,8 @@ from DataParser import Database
 
 
 class DataParserMain(Database):
-    TOKEN = "E6cns5ucSZAxNEfe6gRusH"
-    REST_KEY = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhYmFzZUlkIjoiU0d4SHc2ZWZrdkxWdWhUakFzbzhVQyIsImFjY2Vzc1Blcm0iOiJmdWxsIiwidG9rZW5JZCI6IlZCUHdlaDdCV09yMlhJRTcxbkxsNWJrT1l6b05TdkN6Q1pUYjhIdzJrQ3psWjBST3BwOGJYd3pRdUJteFJBR3EiLCJpYXQiOjE2MTA5Mjc2NTcsImV4cCI6MTYxOTU2NzY1NywiaXNzIjoiZHJvcGJhc2UuaW8iLCJzdWIiOiJvQ3NQODJqOTY2dTgyOXpxN0xoVU00In0.XJF-YbxpBrYQd67epG2LPFHgTn18N4rdmHZWBgwzIus"
+    TOKEN = "hjiAYex3PbXKy2SBwPKkSV"
+    REST_KEY = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhYmFzZUlkIjoiU0d4SHc2ZWZrdkxWdWhUakFzbzhVQyIsImFjY2Vzc1Blcm0iOiJmdWxsIiwidG9rZW5JZCI6Ik5QUjRRZXY0bGIyTWY1STdEdlFsbUVScGNwTURkT2tuMWlJV21ORTVLbjdHUjJoRTN6ZkFSSmNMekJnb093N2EiLCJpYXQiOjE2MTQzMjY0MzMsImV4cCI6MTYxNDMyNjczMywiaXNzIjoiZHJvcGJhc2UuaW8iLCJzdWIiOiJvQ3NQODJqOTY2dTgyOXpxN0xoVU00In0.v38NpmttsxHCfiMfiuZz2MHaLOcVeSnVB-JEf7g6AJc"
 
     query = '?select=player,pts,dropbase_ts'
     default_query = "null"

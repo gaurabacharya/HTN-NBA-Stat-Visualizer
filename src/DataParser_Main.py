@@ -1,34 +1,76 @@
-from DataParser import Database
+from Commands import Commands
+import matplotlib.pyplot as plt
+import numpy as np
 
 
-class DataParserMain(Database):
-    TOKEN = "hjiAYex3PbXKy2SBwPKkSV"
-    REST_KEY = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhYmFzZUlkIjoiU0d4SHc2ZWZrdkxWdWhUakFzbzhVQyIsImFjY2Vzc1Blcm0iOiJmdWxsIiwidG9rZW5JZCI6Ik5QUjRRZXY0bGIyTWY1STdEdlFsbUVScGNwTURkT2tuMWlJV21ORTVLbjdHUjJoRTN6ZkFSSmNMekJnb093N2EiLCJpYXQiOjE2MTQzMjY0MzMsImV4cCI6MTYxNDMyNjczMywiaXNzIjoiZHJvcGJhc2UuaW8iLCJzdWIiOiJvQ3NQODJqOTY2dTgyOXpxN0xoVU00In0.v38NpmttsxHCfiMfiuZz2MHaLOcVeSnVB-JEf7g6AJc"
+year_18 = 2018
+year_19 = 2019
+year_20 = 2020
+#Data Manipulating Commands from class Commands
+points = 'pts'
+assists = 'ast'
+rebounds = 'trb'
+blocks = 'blk'
+steals = 'stl'
+turnovers = 'tov'
+free_throw_percentage = 'ft_'
+fieldgoal_percentage = 'fg_'
+threept_percentage = '_3p_'
 
-    query = '?select=player,pts,dropbase_ts'
-    default_query = "null"
-    table_to_query = "nbastats2"
+categorycode = [points, assists, rebounds, blocks, steals, turnovers, free_throw_percentage, fieldgoal_percentage, threept_percentage]
+category_name = ['Points', 'Assists', 'Rebounds', 'Blocks', 'Steals', 'Turnovers', 'Free Throw Percentage', 'Field Goal Percentage', '3 Point Percentage']
+seasons = ['2017-2018', '2018-2019', '2019-2020']
+sts18 = Commands(str(year_18))
+sts19 = Commands(str(year_19))
+sts20 = Commands(str(year_20))
 
-    def __init__(self):
-        data = Database(self.TOKEN, self.REST_KEY)
+top5all_18 = []
+top5all_19 = []
+top5all_20 = []
 
-        data_base = data.rest_api(self.table_to_query, self.default_query)
+for x in categorycode:
+    top5all_18.append(sts18.get_top5_category(x))
+    top5all_19.append(sts19.get_top5_category(x))
+    top5all_20.append(sts20.get_top5_category(x))
 
-        print(data_base)
+#plotting top 5 for each category
+"""fig = plt.figure(figsize=(10, 6))
+ax = fig.add_axes([0, 0, 1, 1])
+eighteenpts = top5all_18[0]
+labels = eighteenpts.keys()
+x = np.arange(len(labels))
 
-        year_2017_18 = "2021-01-18T01:51:29.180433"
-        year_2018_19 = "2021-01-18T02:12:57.530854"
-        year_2019_20 = "2021-01-18T02:19:10.541736"
 
-        _2017_18 = []
-        _2018_19 = []
-        _2019_20 = []
+ax.set_ylabel("points")
+ax.set_title('Top 5 scorers in 2017-18 Season')
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
 
-        for x in data_base:
-            if x["dropbase_ts"] == year_2017_18:
-                _2017_18.append(x)
-            if x["dropbase_ts"] == year_2018_19:
-                _2018_19.append(x)
-            if x["dropbase_ts"] == year_2019_20:
-                _2019_20.append(x)
+ax.bar(labels, eighteenpts.values())
+plt.show()
+"""
+all_stats = [top5all_18, top5all_19, top5all_20]
+
+for i in range(len(categorycode)):
+    for j in range(len(all_stats)):
+        fig = plt.figure(figsize=(10,6))
+        ax = fig.add_axes([0, 0, 1, 1])
+        current_data = all_stats[j][i]
+        labels = current_data.keys()
+        x = np.arange(len(labels))
+        
+        ax.set_ylabel(category_name[i])
+        ax.set_title('Top 5 Players in the {} Season in {}'.format(seasons[j], category_name[i]))
+        ax.set_xticks(x)
+        ax.set_xticklabels(labels)
+        
+        ax.bar(labels, current_data.values())
+        plt.show()
+        
+        
+    
+
+
+
+
 

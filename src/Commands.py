@@ -1,10 +1,9 @@
-from src.DataParser import Database
+from DataParser import Database
 
 
 class Commands:
-
-    def get_player_stats(self, name, year):
-
+    def __init__(self, year):
+        self.year = year
         TOKEN = "E6cns5ucSZAxNEfe6gRusH"
         REST_KEY = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhYmFzZUlkIjoiU0d4SHc2ZWZrdkxWdWhUakFzbzhVQyIsImFjY2Vzc1Blcm0iOiJmdWxsIiwidG9rZW5JZCI6IlZCUHdlaDdCV09yMlhJRTcxbkxsNWJrT1l6b05TdkN6Q1pUYjhIdzJrQ3psWjBST3BwOGJYd3pRdUJteFJBR3EiLCJpYXQiOjE2MTA5Mjc2NTcsImV4cCI6MTYxOTU2NzY1NywiaXNzIjoiZHJvcGJhc2UuaW8iLCJzdWIiOiJvQ3NQODJqOTY2dTgyOXpxN0xoVU00In0.XJF-YbxpBrYQd67epG2LPFHgTn18N4rdmHZWBgwzIus"
 
@@ -19,36 +18,49 @@ class Commands:
 
         data_base = data.rest_api(table_to_query, default_query)
 
-        print(data_base[347]["player"])
-
-        # print(self.data_base)
-
         _2017_18 = []
         _2018_19 = []
         _2019_20 = []
 
-        for x in data_base:
-            if x["dropbase_ts"] == year_2017_18:
-                _2017_18.append(x)
-            if x["dropbase_ts"] == year_2018_19:
-                _2018_19.append(x)
-            if x["dropbase_ts"] == year_2019_20:
-                _2019_20.append(x)
-
-        if year == "2017":
-            data = _2017_18
-            for x in data:
-                if x["player"] == name:
-                    return x
         if year == "2018":
-            data = _2018_19
-            for x in data:
-                if x["player"] == name:
-                    return x
-        if year == "2019":
-            data = _2019_20
-            for x in data:
-                if x["player"] == name:
-                    return x
+            for x in data_base:
+                if x["dropbase_ts"] == year_2017_18:
+                    _2017_18.append(x)
+            self.stats = _2017_18
+        elif year == "2019":
+            for x in data_base:
+                if x["dropbase_ts"] == year_2018_19:
+                    _2018_19.append(x)
+            self.stats = _2018_19
+        elif year == "2020":
+            for x in data_base:
+                if x["dropbase_ts"] == year_2019_20:
+                    _2019_20.append(x)
+            self.stats = _2019_20
+        else:
+            print("Year is not available")
+
+    def get_player_stats(self, name):
+        for x in self.stats:
+            if x["player"] == name:
+                return x
 
         return "Year or player not found"
+
+    def get_all_category(self, categoryCode):
+        category = dict()
+        for x in self.stats:
+            if x[categoryCode] == 'NaN':
+                category[x['player']] = 0
+            else:
+                category[x['player']] = x[categoryCode]
+        return category
+
+    def get_top5_category(self, categoryCode):
+        all_category = self.get_all_category(categoryCode)
+        sorted_list = {k: v for k, v in sorted(all_category.items(), key=lambda item: item[1], reverse=True)}
+        first5pairs = {k: sorted_list[k] for k in list(sorted_list)[:5]}
+        return first5pairs
+
+    def get_year(self):
+        return self.year

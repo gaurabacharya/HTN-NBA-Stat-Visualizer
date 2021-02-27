@@ -1,7 +1,7 @@
 from Commands import Commands
 import matplotlib.pyplot as plt
 import numpy as np
-
+import os
 
 year_18 = 2018
 year_19 = 2019
@@ -50,7 +50,7 @@ ax.bar(labels, eighteenpts.values())
 plt.show()
 """
 all_stats = [top5all_18, top5all_19, top5all_20]
-
+my_path = os.path.abspath('/Users/gaurabacharya/PycharmProjects/HTN-NBA-Stat-Visualizer/')
 for i in range(len(categorycode)):
     for j in range(len(all_stats)):
         fig = plt.figure(figsize=(10,6))
@@ -65,6 +65,7 @@ for i in range(len(categorycode)):
         ax.set_xticklabels(labels)
         
         ax.bar(labels, current_data.values())
+        plt.savefig('top5-{}-{}.png'.format(category_name[i], seasons[j]), dpi=300, bbox_inches='tight')
         plt.show()
         
         

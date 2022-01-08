@@ -1,5 +1,5 @@
 # HTN-NBA-Stat-Visualizer
-Web scraped NBA statistic data from three seasons and automated finding the top 5 NBA players in each stat category.
+Web scraped NBA statistics from three seasons and automated finding the top 5 NBA players in each stat category.
 
 ## Key Steps 
 * Web scraped NBA Stats data from https://www.basketball-reference.com/ using BeautifulSoup 
